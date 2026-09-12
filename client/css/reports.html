@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports - Smart Attendance</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+  <aside class="sidebar">
+
+    <div class="sidebar-brand">
+      <div class="brand-icon">✓</div>
+
+      <div>
+        <h2>Smart Attendance</h2>
+        <p>Management System</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard.html">📊 Dashboard</a>
+      <a href="students.html">👨‍🎓 Students</a>
+      <a href="attendance.html">📝 Attendance</a>
+      <a href="reports.html" class="active">📈 Reports</a>
+      <a href="#" onclick="logout()">🚪 Logout</a>
+    </nav>
+
+  </aside>
+
+
+  <main class="main-content">
+
+    <header class="topbar">
+
+      <div>
+        <h1>Attendance Reports</h1>
+        <p>View attendance performance and low attendance</p>
+      </div>
+
+      <div class="user-info">
+
+        <div class="user-avatar" id="userAvatar">
+          U
+        </div>
+
+        <div>
+          <strong id="userName">User</strong>
+          <span id="userRole">Faculty</span>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- Summary Cards -->
+
+    <section class="stats-grid">
+
+      <div class="stat-card">
+        <div>
+          <p>Total Students</p>
+          <h2 id="totalStudents">0</h2>
+        </div>
+        <div class="stat-icon">👨‍🎓</div>
+      </div>
+
+
+      <div class="stat-card">
+        <div>
+          <p>Total Classes</p>
+          <h2 id="totalClasses">0</h2>
+        </div>
+        <div class="stat-icon">📚</div>
+      </div>
+
+
+      <div class="stat-card">
+        <div>
+          <p>Present</p>
+          <h2 id="totalPresent">0</h2>
+        </div>
+        <div class="stat-icon">✓</div>
+      </div>
+
+
+      <div class="stat-card">
+        <div>
+          <p>Absent</p>
+          <h2 id="totalAbsent">0</h2>
+        </div>
+        <div class="stat-icon">✕</div>
+      </div>
+
+    </section>
+
+
+    <!-- Overall Report -->
+
+    <section class="content-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Overall Attendance</h2>
+          <p>Attendance summary of all students</p>
+        </div>
+
+        <button
+          class="btn-secondary"
+          onclick="loadReports()">
+          ↻ Refresh
+        </button>
+
+      </div>
+
+
+      <div class="attendance-progress">
+
+        <div class="progress-info">
+          <span>Overall Attendance</span>
+          <strong id="overallPercentage">0%</strong>
+        </div>
+
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            id="overallProgress">
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    </section>
+
+
+<!-- AI Attendance Risk Prediction -->
+
+<section class="content-card">
+
+  <div class="card-header">
+    <div>
+      <h2>🤖 AI Attendance Risk Prediction</h2>
+      <p>AI-based analysis of student attendance risk</p>
+    </div>
+
+    <button class="btn-secondary" onclick="loadAIRisk()">
+      🤖 Analyze
+    </button>
+  </div>
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Student Name</th>
+          <th>Attendance</th>
+          <th>Risk Level</th>
+          <th>AI Recommendation</th>
+        </tr>
+      </thead>
+
+      <tbody id="aiRiskBody">
+
+        <tr>
+          <td colspan="5" style="text-align:center;">
+            Click Analyze to generate AI prediction
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+    <!-- Student Report -->
+
+    <section class="content-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Student-wise Attendance</h2>
+          <p>Attendance percentage of each student</p>
+        </div>
+
+      </div>
+
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Total Classes</th>
+              <th>Present</th>
+              <th>Absent</th>
+              <th>Attendance %</th>
+              <th>Status</th>
+            </tr>
+
+          </thead>
+
+
+          <tbody id="reportTableBody">
+
+            <tr>
+              <td colspan="7" style="text-align:center;">
+                Loading reports...
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- Low Attendance -->
+
+    <section class="content-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>⚠️ Low Attendance Students</h2>
+          <p>Students having attendance below 75%</p>
+        </div>
+
+      </div>
+
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Attendance %</th>
+              <th>Required</th>
+            </tr>
+
+          </thead>
+
+
+          <tbody id="lowAttendanceBody">
+
+            <tr>
+              <td colspan="4" style="text-align:center;">
+                Loading...
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<script src="js/auth.js"></script>
+<script src="js/reports.js"></script>
+
+</body>
+</html>
