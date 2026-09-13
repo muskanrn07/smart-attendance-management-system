@@ -1,4 +1,4 @@
-const DASHBOARD_API = "http://localhost:5000/api";
+const DASHBOARD_API = "https://smart-attendance-management-system-96xa.onrender.com"
 
 
 // ==========================================

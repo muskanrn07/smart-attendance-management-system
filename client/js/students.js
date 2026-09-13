@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://smart-attendance-management-system-96xa.onrender.com"
 
 let students = [];
 

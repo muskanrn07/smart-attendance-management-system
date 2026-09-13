@@ -3,7 +3,7 @@
 // AUTHENTICATION
 // ======================================
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://smart-attendance-management-system-96xa.onrender.com"
 
 
 // ======================================
@@ -117,7 +117,7 @@ function setupLoginForm() {
 
                 const response =
                     await fetch(
-                        `${API_URL}/auth/login`,
+                        `${API_URL}/api/auth/login`,
                         {
                             method: "POST",
 
@@ -256,7 +256,7 @@ function setupRegisterForm() {
 
                 const response =
                     await fetch(
-                        `${API_URL}/auth/register`,
+                        `${API_URL}/api/auth/register`,
                         {
                             method: "POST",
 

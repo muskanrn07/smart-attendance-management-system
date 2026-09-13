@@ -1,5 +1,4 @@
-const ATTENDANCE_API = "http://localhost:5000/api";
-
+const ATTENDANCE_API = "https://smart-attendance-management-system-96xa.onrender.com"
 
 // ==========================================
 // CHECK LOGIN
