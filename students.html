@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - Smart Attendance</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-icon">✓</div>
+
+            <div>
+                <h2>Smart Attendance</h2>
+                <p>Management System</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html">📊 Dashboard</a>
+            <a href="students.html" class="active">👨‍🎓 Students</a>
+            <a href="attendance.html">📝 Attendance</a>
+            <a href="reports.html">📈 Reports</a>
+            <a href="#" onclick="logout()">🚪 Logout</a>
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <h1>Students</h1>
+                <p>Manage student information</p>
+            </div>
+
+            <div class="user-info">
+
+                <div class="user-avatar" id="userAvatar">
+                    U
+                </div>
+
+                <div>
+                    <strong id="userName">User</strong>
+                    <span id="userRole">Faculty</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ADD STUDENT -->
+        <section class="content-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Add Student</h2>
+                    <p>Add a new student to the system</p>
+                </div>
+
+            </div>
+
+
+            <form id="studentForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Student ID</label>
+                        <input
+                            type="text"
+                            id="studentId"
+                            placeholder="e.g. BCA003"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Student name"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            id="studentEmail"
+                            placeholder="student@gmail.com"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Course</label>
+                        <input
+                            type="text"
+                            id="studentCourse"
+                            value="BCA"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Semester</label>
+
+                        <select id="studentSemester" required>
+
+                            <option value="">Select Semester</option>
+
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Section</label>
+
+                        <select id="studentSection" required>
+
+                            <option value="">Select Section</option>
+
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Phone</label>
+
+                        <input
+                            type="text"
+                            id="studentPhone"
+                            placeholder="9876543210"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Status</label>
+
+                        <select id="studentStatus">
+
+                            <option value="Active">
+                                Active
+                            </option>
+
+                            <option value="Inactive">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div id="studentMessage"></div>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    + Add Student
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- BULK UPLOAD -->
+        <section class="content-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>📁 Bulk Student Upload</h2>
+
+                    <p>
+                        Upload a CSV file to add multiple students at once
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="bulk-upload-box">
+
+                <p>
+                    CSV format:
+                    <strong>
+                        studentId, name, email, course, semester, section, phone, status
+                    </strong>
+                </p>
+
+
+                <input
+                    type="file"
+                    id="studentFile"
+                    accept=".csv"
+                >
+
+
+                <br><br>
+
+
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="uploadStudents()"
+                >
+                    📤 Import Students
+                </button>
+
+
+                <div id="bulkMessage"></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- STUDENT LIST -->
+        <section class="content-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Student List</h2>
+
+                    <p>
+                        All students registered in the system
+                    </p>
+                </div>
+
+
+                <button
+                    class="btn-secondary"
+                    onclick="loadStudents()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH -->
+            <div class="form-group">
+
+                <input
+                    type="text"
+                    id="studentSearch"
+                    placeholder="🔍 Search student by ID or name..."
+                    oninput="filterStudents()"
+                >
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Semester</th>
+                            <th>Section</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="studentTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="9"
+                                style="text-align:center;"
+                            >
+                                Loading students...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="js/auth.js"></script>
+<script src="js/students.js"></script>
+
+</body>
+</html>
